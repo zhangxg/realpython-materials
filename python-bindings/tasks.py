@@ -129,18 +129,17 @@ def test_cffi(c):
 def build_cppmult(c):
     """Build the shared library for the sample C++ code"""
     print_banner("Building C++ Library")
-    invoke.run(
-        "g++ -O3 -Wall -Werror -shared -std=c++11 -fPIC cppmult.cpp "
-        "-o libcppmult.so "
-    )
+    invoke.run("g++ -O3 -Wall -Werror -shared -std=c++11 -fPIC cppmult.cpp " "-o libcppmult.so ")
     print("* Complete")
 
 
 def compile_python_module(cpp_name, extension_name):
+    # FIXME-xG@230705-1624: add  '"-undefined dynamic_lookup "' to avoid 'ld: symbol not found'
     invoke.run(
         "g++ -O3 -Wall -Werror -shared -std=c++11 -fPIC "
         "`python3 -m pybind11 --includes` "
         "-I . "
+        "-undefined dynamic_lookup "
         "{0} "
         "-o {1}`python3-config --extension-suffix` "
         "-L. -lcppmult -Wl,-rpath,.".format(cpp_name, extension_name)

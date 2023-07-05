@@ -9,4 +9,12 @@ $ python -m pip install -r requirements.txt
 ```
 This should be done inside a virtual environment.
 
+```sh 
+
+conda create -n learn-box pip python=3.8
+
+```
+> python3.11 not working: packages can not install. 
+
+
 Once that is installed, you can use the invoke tool mentioned in the article to build and run the tests. See the tasks.py file or run invoke --list to get more details.

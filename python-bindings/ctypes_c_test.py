@@ -6,6 +6,8 @@ import pathlib
 
 if __name__ == "__main__":
     libname = pathlib.Path().absolute()
+    # FIXME-xG@230705-1626: append the "python-bindings" to the path
+    libname = libname / "python-bindings"
     print("libname: ", libname)
 
     # Load the shared library into c types.
